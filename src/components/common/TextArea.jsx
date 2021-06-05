@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 import { FieldError } from './FieldError';
 
-export function Input({ id, className, width, placeholder, type, rounded, value, error, readOnly, onChange }) {
+export function TextArea({ id, className, width, placeholder, type, rounded, value, error, readOnly, onChange }) {
   const handleOnChange = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -11,7 +11,7 @@ export function Input({ id, className, width, placeholder, type, rounded, value,
 
   if (readOnly) {
     return (
-      <span className={`h-12 text-sm py-2 px-3 font-light ${className} ${width ? width : 'w-full'}`}>
+      <span className={` text-sm py-2 px-3 font-light ${className} ${width ? width : 'w-full'}`}>
         {type === 'password' ? '*********' : value}
       </span>
     );
@@ -20,7 +20,7 @@ export function Input({ id, className, width, placeholder, type, rounded, value,
   const classes = [
     // Default CSS clases
     'appearance-none',
-    'h-8',
+    'h-16',
     'bg-gray-50',
     'border',
     'bg-white',
@@ -37,7 +37,7 @@ export function Input({ id, className, width, placeholder, type, rounded, value,
     // Conditional CSS classes
     width || 'w-full',
     rounded ? 'rounded-full' : 'rounded',
-    error ? 'border-red-100' : 'border-gray-700'
+    error ? 'border-red-500' : 'border-gray-100'
   ];
 
   // Add the custom CSS classes at the end, in case we need to override
@@ -46,22 +46,24 @@ export function Input({ id, className, width, placeholder, type, rounded, value,
   }
 
   return (
-    <>
-      <input
+    <div className="flex-col">
+      <textarea
         className={classes.join(' ')}
         id={id}
-        type={type || 'text'}
+        type="text"
+        rows="4"
+        cols="50"
+        maxLength="200"
         placeholder={placeholder}
         onChange={handleOnChange}
         value={value}
       />
-      {/* TODO: Should errors be implemented in a Form.Input component that composes Input ? */}
       {error ? <FieldError>{error}</FieldError> : null}
-    </>
+    </div>
   );
 }
 
-Input.propTypes = {
+TextArea.propTypes = {
   id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
   width: PropTypes.string,

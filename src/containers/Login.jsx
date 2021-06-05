@@ -32,7 +32,7 @@ export function Login() {
 
   return (
     <div
-      className="relative flex flex-col justify-center items-center h-full w-full bg-login bg-cover"
+      className="relative flex flex-col justify-center items-center h-full w-full bg-gray-50"
       style={{ minHeight: 724 }}
     >
       <FlashMessage className="absolute top-0 mt-16" />
